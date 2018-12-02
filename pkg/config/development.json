@@ -1,0 +1,9 @@
+{
+    "database_host": "localhost",
+    "database_name": "send_it",
+    "database_port": 5432,
+    "database_user": "send_it_admin",
+    "host": "localhost",
+    "jwt_secret": "secret",
+    "port": 3001
+}
