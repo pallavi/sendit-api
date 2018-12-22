@@ -46,5 +46,5 @@
   version = "9.23.0"
 
 [[constraint]]
-  name = "gopkg.in/go-playground/mold.v2"
-  version = "2.2.0"
+  branch = "master"
+  name = "github.com/facebookgo/grace"

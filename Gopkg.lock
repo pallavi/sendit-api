@@ -10,6 +10,41 @@
   version = "v3.2.0"
 
 [[projects]]
+  branch = "master"
+  digest = "1:5fe3f6ede1c208a2efd3b78fe4df0306aa9624edd39476143d14f0326e5a8d29"
+  name = "github.com/facebookgo/clock"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "600d898af40aa09a7a93ecb9265d87b0504b6f03"
+
+[[projects]]
+  branch = "master"
+  digest = "1:1f21d86648746b776eae0dff77e4cafa2d9ccec0f0f1248c48306231ee800674"
+  name = "github.com/facebookgo/grace"
+  packages = [
+    "gracehttp",
+    "gracenet",
+  ]
+  pruneopts = "UT"
+  revision = "75cf19382434e82df4dd84953f566b8ad23d6e9e"
+
+[[projects]]
+  branch = "master"
+  digest = "1:17cb421603403a24edb0c7eeb382295dd31c72ab9ccf31cf7f0a37971f00aaa7"
+  name = "github.com/facebookgo/httpdown"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "5979d39b15c26299dc282711b0d65b113daccea6"
+
+[[projects]]
+  branch = "master"
+  digest = "1:02c7a4e944d94d6b80f51517158d10633b10775f528a3b7bdfc658d6f92415bd"
+  name = "github.com/facebookgo/stats"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "1b76add642e42c6ffba7211ad7b3939ce654526e"
+
+[[projects]]
   digest = "1:cba793f293a89624db1ed858a94c83d92a5f7c398801e11c73173daf9c77020e"
   name = "github.com/go-pg/migrations"
   packages = ["."]
@@ -100,14 +135,6 @@
   version = "v0.0.4"
 
 [[projects]]
-  digest = "1:1b10751ffd2aa4dc6986b0798b55cf7dff327f7f35b37724b971d832cd8a2621"
-  name = "github.com/segmentio/go-snakecase"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "ceb69a29e76325a6bc236bb53cefe28d28348373"
-  version = "v1.1.0"
-
-[[projects]]
   digest = "1:c468422f334a6b46a19448ad59aaffdfc0a36b08fdcc1c749a0b29b6453d7e59"
   name = "github.com/valyala/bytebufferpool"
   packages = ["."]
@@ -146,17 +173,6 @@
   revision = "0cf1ed9e522b7dbb416f080a5c8003de9b702bf4"
 
 [[projects]]
-  digest = "1:dad6cd59e8bb8d209194efbd3850b5d054384a63061671bfc2a6b2cc0929c731"
-  name = "gopkg.in/go-playground/mold.v2"
-  packages = [
-    ".",
-    "modifiers",
-  ]
-  pruneopts = "UT"
-  revision = "6bc20ce40733e8e04c2fda4523a957dd8e198948"
-  version = "v2.2.0"
-
-[[projects]]
   digest = "1:2c6a8f26c364b006a27b8090a9583fcc4b7865583fcf93f99a20fce339e87192"
   name = "gopkg.in/go-playground/validator.v9"
   packages = ["."]
@@ -177,14 +193,13 @@
   analyzer-version = 1
   input-imports = [
     "github.com/dgrijalva/jwt-go",
+    "github.com/facebookgo/grace/gracehttp",
     "github.com/go-pg/migrations",
     "github.com/go-pg/pg",
     "github.com/go-pg/pg/orm",
     "github.com/labstack/echo",
     "github.com/labstack/echo/middleware",
     "golang.org/x/crypto/bcrypt",
-    "gopkg.in/go-playground/mold.v2",
-    "gopkg.in/go-playground/mold.v2/modifiers",
     "gopkg.in/go-playground/validator.v9",
   ]
   solver-name = "gps-cdcl"

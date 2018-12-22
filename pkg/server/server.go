@@ -1,6 +1,8 @@
 package server
 
 import (
+	"net/http"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/pallavi/sendit-api/pkg/application"
@@ -15,7 +17,7 @@ import (
 )
 
 // New returns an Echo server
-func New(app *application.App) *echo.Echo {
+func New(app *application.App) *http.Server {
 	e := echo.New()
 
 	e.Validator = validator.New()
@@ -32,5 +34,5 @@ func New(app *application.App) *echo.Echo {
 	sessions.RegisterRoutes(e, app)
 	climbs.RegisterRoutes(e, app)
 
-	return e
+	return e.Server
 }
