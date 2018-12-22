@@ -10,10 +10,11 @@ import (
 )
 
 type createParams struct {
-	LocationID int    `form:"location" validate:"required"`
-	Name       string `form:"name" validate:"required,ascii,min=1,max=100"`
-	Type       string `form:"type" validate:"required,oneof=boulder toprope lead"`
-	Grade      string `form:"grade" validate:"required,grade"`
+	LocationID int      `form:"location" validate:"required"`
+	Name       string   `form:"name" validate:"required,ascii,min=1,max=100"`
+	Type       string   `form:"type" validate:"required,oneof=boulder toprope lead"`
+	Grade      string   `form:"grade" validate:"required,grade"`
+	Tags       []string `form:"tags" validate:"omitempty,dive,required,ascii,min=1,max=100"`
 }
 
 func (h *handler) create(c echo.Context) error {
@@ -32,6 +33,7 @@ func (h *handler) create(c echo.Context) error {
 		Name:       payload.Name,
 		Type:       payload.Type,
 		Grade:      payload.Grade,
+		Tags:       payload.Tags,
 	}
 	err = h.app.DB.RunInTransaction(func(tx *pg.Tx) error {
 		_, err := tx.Model(&route).Insert()

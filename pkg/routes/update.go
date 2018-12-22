@@ -11,10 +11,11 @@ import (
 
 // UpdateParams are the payload for updating a route
 type UpdateParams struct {
-	LocationID int    `form:"location" validate:"omitempty"`
-	Name       string `form:"name" validate:"omitempty,ascii,min=1,max=100"`
-	Type       string `form:"type" validate:"omitempty,oneof=boulder toprope lead"`
-	Grade      string `form:"grade" validate:"omitempty,grade"`
+	LocationID int      `form:"location" validate:"omitempty"`
+	Name       string   `form:"name" validate:"omitempty,ascii,min=1,max=100"`
+	Type       string   `form:"type" validate:"omitempty,oneof=boulder toprope lead"`
+	Grade      string   `form:"grade" validate:"omitempty,grade"`
+	Tags       []string `form:"tags" validate:"omitempty,dive,required,ascii,min=1,max=100"`
 }
 
 // ValidateUpdateParams is a custom struct-level validator that
@@ -61,6 +62,10 @@ func (h *handler) update(c echo.Context) error {
 	if payload.Grade != "" {
 		route.Grade = payload.Grade
 		columns = append(columns, "grade")
+	}
+	if payload.Tags != nil {
+		route.Tags = payload.Tags
+		columns = append(columns, "tags")
 	}
 
 	result, err := h.app.DB.Model(&route).

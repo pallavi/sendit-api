@@ -24,6 +24,7 @@ type Route struct {
 	Name         string    `sql:"name,notnull" json:"name"`
 	Type         string    `sql:"type,notnull" json:"type"`
 	Grade        string    `sql:"grade,notnull" json:"grade"`
+	Tags         []string  `sql:"tags,array" json:"tags"`
 	Deleted      bool      `sql:"deleted" json:"deleted,omitempty"`
 	DateCreated  time.Time `sql:"date_created,notnull" json:"date_created"`
 	DateModified time.Time `sql:"date_modified,notnull" json:"date_modified"`
