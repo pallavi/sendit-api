@@ -62,7 +62,7 @@ func (r *Route) BeforeUpdate(db orm.DB) error {
 
 // BelongsToUser checks if the route belongs to the given user
 func (r *Route) BelongsToUser(uid int, db orm.DB) bool {
-	err := db.Model(&r).
+	err := db.Model(r).
 		WherePK().
 		Where("user_id = ?", uid).
 		Select()

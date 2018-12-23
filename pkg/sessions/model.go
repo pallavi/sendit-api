@@ -38,7 +38,7 @@ func (s *Session) BeforeUpdate(db orm.DB) error {
 
 // BelongsToUser checks if the session belongs to the given user
 func (s *Session) BelongsToUser(uid int, db orm.DB) bool {
-	err := db.Model(&s).
+	err := db.Model(s).
 		WherePK().
 		Where("user_id = ?", uid).
 		Select()

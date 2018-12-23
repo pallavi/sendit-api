@@ -12,10 +12,11 @@ import (
 )
 
 type createParams struct {
-	SessionID int   `form:"session" validate:"required"`
-	RouteID   int   `form:"route" validate:"required"`
-	Attempts  int   `form:"attempts" validate:"required,min=1"`
-	Sent      *bool `form:"sent" validate:"required"`
+	SessionID int    `form:"session" validate:"required"`
+	RouteID   int    `form:"route" validate:"required"`
+	Attempts  int    `form:"attempts" validate:"required,min=1"`
+	Sent      *bool  `form:"sent" validate:"required"`
+	Notes     string `form:"notes" validate:"omitempty,max=5000"`
 }
 
 func (h *handler) create(c echo.Context) error {
@@ -41,6 +42,7 @@ func (h *handler) create(c echo.Context) error {
 		RouteID:   payload.RouteID,
 		Attempts:  payload.Attempts,
 		Sent:      *payload.Sent,
+		Notes:     payload.Notes,
 	}
 	err = h.app.DB.RunInTransaction(func(tx *pg.Tx) error {
 		_, err := tx.Model(&climb).Insert()

@@ -37,7 +37,7 @@ func (l *Location) BeforeUpdate(db orm.DB) error {
 
 // BelongsToUser checks if the location belongs to the given user
 func (l *Location) BelongsToUser(uid int, db orm.DB) bool {
-	err := db.Model(&l).
+	err := db.Model(l).
 		WherePK().
 		Where("user_id = ?", uid).
 		Select()

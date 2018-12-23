@@ -16,6 +16,7 @@ type Climb struct {
 	RouteID      int       `sql:"route_id,notnull" json:"route"`
 	Attempts     int       `sql:"attempts,notnull" json:"attempts"`
 	Sent         bool      `sql:"sent,notnull" json:"sent"`
+	Notes        string    `sql:"notes" json:"notes"`
 	Deleted      bool      `sql:"deleted" json:"deleted,omitempty"`
 	DateCreated  time.Time `sql:"date_created,notnull" json:"date_created"`
 	DateModified time.Time `sql:"date_modified,notnull" json:"date_modified"`
@@ -39,7 +40,7 @@ func (c *Climb) BeforeUpdate(db orm.DB) error {
 
 // BelongsToUser checks if the climb belongs to the given user
 func (c *Climb) BelongsToUser(uid int, db orm.DB) bool {
-	err := db.Model(&c).
+	err := db.Model(c).
 		WherePK().
 		Select()
 	if err != nil {

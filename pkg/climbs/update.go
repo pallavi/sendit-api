@@ -9,8 +9,9 @@ import (
 )
 
 type updateParams struct {
-	Attempts int   `form:"attempts" validate:"omitempty,min=1"`
-	Sent     *bool `form:"sent" validate:"omitempty"`
+	Attempts int    `form:"attempts" validate:"omitempty,min=1"`
+	Sent     *bool  `form:"sent" validate:"omitempty"`
+	Notes    string `form:"notes" validate:"omitempty,max=5000"`
 }
 
 func (h *handler) update(c echo.Context) error {
@@ -41,6 +42,10 @@ func (h *handler) update(c echo.Context) error {
 	if payload.Sent != nil {
 		climb.Sent = *payload.Sent
 		columns = append(columns, "sent")
+	}
+	if payload.Notes != "" {
+		climb.Notes = payload.Notes
+		columns = append(columns, "notes")
 	}
 
 	result, err := h.app.DB.Model(&climb).
