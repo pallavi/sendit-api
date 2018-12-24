@@ -2,7 +2,6 @@ package users
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
@@ -10,15 +9,11 @@ import (
 )
 
 func (h *handler) retrieve(c echo.Context) error {
-	uid, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		return errors.InvalidID("user")
-	}
 	claims, err := jwt.GetClaims(c)
-	if uid != claims.ID {
-		return errors.NotFound("user")
+	if err != nil {
+		return errors.BadJWTClaims(err.Error())
 	}
-	user := &User{ID: uid}
+	user := &User{ID: claims.ID}
 	err = h.app.DB.Select(user)
 	if err != nil {
 		return errors.DatabaseError("user", err.Error())

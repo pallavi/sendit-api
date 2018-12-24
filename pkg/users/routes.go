@@ -16,6 +16,7 @@ func RegisterRoutes(e *echo.Echo, app *application.App) {
 
 	g := e.Group("/users")
 	g.POST("", h.create, jwt.SkipMiddleware())
-	g.GET("/:id", h.retrieve, jwt.Middleware(app))
-	g.PUT("/:id", h.update, jwt.Middleware(app))
+	g.GET("", h.list, jwt.SkipMiddleware())
+	g.GET("/me", h.retrieve, jwt.Middleware(app))
+	g.PUT("/me", h.update, jwt.Middleware(app))
 }

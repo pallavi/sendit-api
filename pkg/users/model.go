@@ -12,7 +12,7 @@ type User struct {
 	tableName struct{} `sql:"users"`
 
 	ID           int       `sql:"id,pk" json:"id"`
-	JWTToken     string    `sql:"-" json:"jwt_token"`
+	JWTToken     string    `sql:"-" json:"jwt_token,omitempty"`
 	Username     string    `sql:"username,notnull" json:"username"`
 	Password     string    `sql:"password,notnull" json:"-"`
 	DateCreated  time.Time `sql:"date_created,notnull" json:"date_created"`

@@ -1,8 +1,6 @@
 package users
 
 import (
-	"strconv"
-
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
@@ -19,10 +17,9 @@ func (h *handler) update(c echo.Context) error {
 	if err != nil {
 		return errors.BadRequest(err.Error())
 	}
-	uid := c.Param("id")
 	claims, err := jwt.GetClaims(c)
-	if uid != strconv.Itoa(claims.ID) {
-		return errors.NotFound("user")
+	if err != nil {
+		return errors.BadJWTClaims(err.Error())
 	}
 
 	user := User{ID: claims.ID}
