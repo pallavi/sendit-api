@@ -31,8 +31,11 @@ func NotFound(resource string) error {
 
 // BadRequest returns a 400 error when request fails validation
 func BadRequest(msg string) error {
-	errMsg := strings.Split(msg, "Error:")[1]
-	return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("validation failed: %s", errMsg))
+	errMsg := strings.Split(msg, "Error:")
+	if len(errMsg) > 1 {
+		msg = errMsg[1]
+	}
+	return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("validation failed: %s", msg))
 }
 
 // InvalidID returns a 400 error on invalid IDs in the path
