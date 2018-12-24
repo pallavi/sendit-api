@@ -23,6 +23,7 @@ func New(app *application.App) *http.Server {
 	e.Validator = validator.New()
 	e.Binder = binder.New()
 
+	e.Use(middleware.CORS())
 	e.Use(middleware.RequestID())
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
