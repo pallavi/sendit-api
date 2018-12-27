@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 	"github.com/pallavi/sendit-api/pkg/users"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -18,7 +19,7 @@ func (h *handler) login(c echo.Context) error {
 		return errors.BadRequest(err.Error())
 	}
 
-	user := users.User{}
+	user := models.User{}
 	err = h.app.DB.Model(&user).
 		Where("username = ?", payload.Username).
 		Select()

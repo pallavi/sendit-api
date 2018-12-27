@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 type listParams struct {
@@ -22,7 +23,7 @@ func (h *handler) list(c echo.Context) error {
 	if err != nil {
 		return errors.BadJWTClaims(err.Error())
 	}
-	sessions := []Session{}
+	sessions := []models.Session{}
 	query := h.app.DB.Model(&sessions).
 		Where("user_id = ?", claims.ID).
 		Where("deleted = false")

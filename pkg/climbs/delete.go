@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 func (h *handler) delete(c echo.Context) error {
@@ -18,11 +19,11 @@ func (h *handler) delete(c echo.Context) error {
 	if err != nil {
 		return errors.BadJWTClaims(err.Error())
 	}
-	climb := Climb{ID: cid}
+	climb := models.Climb{ID: cid}
 	if !climb.BelongsToUser(claims.ID, h.app.DB) {
 		return errors.NotFound("climb")
 	}
-	climb = Climb{
+	climb = models.Climb{
 		ID:      cid,
 		Deleted: true,
 	}

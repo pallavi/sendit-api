@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 type createParams struct {
@@ -24,7 +25,7 @@ func (h *handler) create(c echo.Context) error {
 	if err != nil {
 		return errors.BadJWTClaims(err.Error())
 	}
-	location := Location{
+	location := models.Location{
 		UserID:  claims.ID,
 		Name:    payload.Name,
 		Outdoor: *payload.Outdoor,

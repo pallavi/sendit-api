@@ -5,6 +5,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 type listParams struct {
@@ -17,7 +18,7 @@ func (h *handler) list(c echo.Context) error {
 	if err != nil {
 		return errors.BadRequest(err.Error())
 	}
-	users := []User{}
+	users := []models.User{}
 	query := h.app.DB.Model(&users)
 	if params.Username != "" {
 		query = query.Where("username = ?", params.Username)

@@ -9,6 +9,7 @@ import (
 	"github.com/pallavi/sendit-api/pkg/binder"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 type createParams struct {
@@ -27,7 +28,7 @@ func (h *handler) create(c echo.Context) error {
 	if err != nil {
 		return errors.BadJWTClaims(err.Error())
 	}
-	session := Session{
+	session := models.Session{
 		UserID:     claims.ID,
 		LocationID: payload.LocationID,
 	}

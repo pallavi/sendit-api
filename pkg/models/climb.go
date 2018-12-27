@@ -1,10 +1,9 @@
-package climbs
+package models
 
 import (
 	"time"
 
 	"github.com/go-pg/pg/orm"
-	"github.com/pallavi/sendit-api/pkg/sessions"
 )
 
 // Climb represents the database model for a climb
@@ -46,6 +45,6 @@ func (c *Climb) BelongsToUser(uid int, db orm.DB) bool {
 	if err != nil {
 		return false
 	}
-	session := sessions.Session{ID: c.SessionID}
+	session := Session{ID: c.SessionID}
 	return session.BelongsToUser(uid, db)
 }

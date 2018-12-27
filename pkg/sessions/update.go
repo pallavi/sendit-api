@@ -8,6 +8,7 @@ import (
 	"github.com/pallavi/sendit-api/pkg/binder"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 type updateParams struct {
@@ -30,7 +31,7 @@ func (h *handler) update(c echo.Context) error {
 		return errors.BadJWTClaims(err.Error())
 	}
 
-	session := Session{ID: sid}
+	session := models.Session{ID: sid}
 	columns := []string{"date_modified"}
 	if payload.StartTime != nil {
 		session.StartTime = time.Time(*payload.StartTime)

@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 type listParams struct {
@@ -14,6 +15,7 @@ type listParams struct {
 	Type       string   `query:"type" validate:"omitempty,oneof=boulder toprope lead"`
 	Grade      string   `query:"grade" validate:"omitempty,grade"`
 	Tags       []string `query:"tags" validate:"omitempty,dive,required,ascii,min=1,max=100"`
+	Include    []string `query:"include" validate:"omitempty,dive,required,oneof=climbs"`
 }
 
 func (h *handler) list(c echo.Context) error {
@@ -26,7 +28,7 @@ func (h *handler) list(c echo.Context) error {
 	if err != nil {
 		return errors.BadJWTClaims(err.Error())
 	}
-	routes := []Route{}
+	routes := []models.Route{}
 	query := h.app.DB.Model(&routes).
 		Where("route.user_id = ?", claims.ID).
 		Where("route.deleted = false").
@@ -42,6 +44,9 @@ func (h *handler) list(c echo.Context) error {
 	}
 	if params.Tags != nil {
 		query = query.Where("tags @> ?", pg.Array(params.Tags))
+	}
+	if params.Include != nil {
+		query = query.Relation("Climbs")
 	}
 	err = query.Order("date_created desc").Select()
 	if err != nil {

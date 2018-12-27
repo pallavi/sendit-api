@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 type updateParams struct {
@@ -28,12 +29,12 @@ func (h *handler) update(c echo.Context) error {
 	if err != nil {
 		return errors.BadJWTClaims(err.Error())
 	}
-	climb := Climb{ID: cid}
+	climb := models.Climb{ID: cid}
 	if !climb.BelongsToUser(claims.ID, h.app.DB) {
 		return errors.NotFound("climb")
 	}
 
-	climb = Climb{ID: cid}
+	climb = models.Climb{ID: cid}
 	columns := []string{"date_modified"}
 	if payload.Attempts != 0 {
 		climb.Attempts = payload.Attempts

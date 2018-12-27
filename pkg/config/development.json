@@ -1,4 +1,5 @@
 {
+    "database_debug": true,
     "database_host": "localhost",
     "database_name": "send_it",
     "database_port": 5432,

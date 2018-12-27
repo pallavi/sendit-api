@@ -6,6 +6,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 func (h *handler) delete(c echo.Context) error {
@@ -17,7 +18,7 @@ func (h *handler) delete(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	session := Session{
+	session := models.Session{
 		ID:      sid,
 		Deleted: true,
 	}

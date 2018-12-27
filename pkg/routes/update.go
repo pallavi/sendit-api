@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 	validator "gopkg.in/go-playground/validator.v9"
 )
 
@@ -45,7 +46,7 @@ func (h *handler) update(c echo.Context) error {
 		return errors.BadJWTClaims(err.Error())
 	}
 
-	route := Route{ID: rid}
+	route := models.Route{ID: rid}
 	columns := []string{"date_modified"}
 	if payload.LocationID != 0 {
 		route.LocationID = payload.LocationID

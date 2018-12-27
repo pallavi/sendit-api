@@ -10,6 +10,7 @@ import (
 
 // Config contains environment specific configuration values.
 type Config struct {
+	DatabaseDebug    bool   `json:"database_debug"`
 	DatabaseHost     string `json:"database_host"`
 	DatabaseName     string `json:"database_name"`
 	DatabasePassword string `json:"database_password"`

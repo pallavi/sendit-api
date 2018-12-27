@@ -5,7 +5,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/jwt"
-	"github.com/pallavi/sendit-api/pkg/users"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 func (h *handler) refresh(c echo.Context) error {
@@ -17,7 +17,7 @@ func (h *handler) refresh(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	return c.JSON(http.StatusOK, users.User{
+	return c.JSON(http.StatusOK, models.User{
 		ID:       claims.ID,
 		Username: claims.Username,
 		JWTToken: token,

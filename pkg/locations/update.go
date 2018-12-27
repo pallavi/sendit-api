@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 type updateParams struct {
@@ -28,7 +29,7 @@ func (h *handler) update(c echo.Context) error {
 		return errors.BadJWTClaims(err.Error())
 	}
 
-	location := Location{ID: lid}
+	location := models.Location{ID: lid}
 	columns := []string{"date_modified"}
 	if payload.Name != "" {
 		location.Name = payload.Name

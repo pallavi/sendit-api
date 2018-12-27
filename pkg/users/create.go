@@ -6,6 +6,7 @@ import (
 	"github.com/go-pg/pg"
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 // CreateParams contains a username and password
@@ -20,7 +21,7 @@ func (h *handler) create(c echo.Context) error {
 	if err != nil {
 		return errors.BadRequest(err.Error())
 	}
-	user := User{
+	user := models.User{
 		Username: payload.Username,
 		Password: payload.Password,
 	}

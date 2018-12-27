@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 func (h *handler) retrieve(c echo.Context) error {
@@ -18,7 +19,7 @@ func (h *handler) retrieve(c echo.Context) error {
 	if err != nil {
 		return errors.BadJWTClaims(err.Error())
 	}
-	route := Route{ID: rid}
+	route := models.Route{ID: rid}
 	err = h.app.DB.Model(&route).
 		WherePK().
 		Where("route.user_id = ?", claims.ID).

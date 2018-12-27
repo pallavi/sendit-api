@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 func (h *handler) retrieve(c echo.Context) error {
@@ -13,7 +14,7 @@ func (h *handler) retrieve(c echo.Context) error {
 	if err != nil {
 		return errors.BadJWTClaims(err.Error())
 	}
-	user := &User{ID: claims.ID}
+	user := &models.User{ID: claims.ID}
 	err = h.app.DB.Select(user)
 	if err != nil {
 		return errors.DatabaseError("user", err.Error())

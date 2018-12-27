@@ -7,8 +7,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/pallavi/sendit-api/pkg/errors"
 	"github.com/pallavi/sendit-api/pkg/jwt"
-	"github.com/pallavi/sendit-api/pkg/routes"
-	"github.com/pallavi/sendit-api/pkg/sessions"
+	"github.com/pallavi/sendit-api/pkg/models"
 )
 
 type createParams struct {
@@ -29,15 +28,15 @@ func (h *handler) create(c echo.Context) error {
 	if err != nil {
 		return errors.BadJWTClaims(err.Error())
 	}
-	session := sessions.Session{ID: payload.SessionID}
+	session := models.Session{ID: payload.SessionID}
 	if !session.BelongsToUser(claims.ID, h.app.DB) {
 		return errors.NotFound("session")
 	}
-	route := routes.Route{ID: payload.RouteID}
+	route := models.Route{ID: payload.RouteID}
 	if !route.BelongsToUser(claims.ID, h.app.DB) {
 		return errors.NotFound("route")
 	}
-	climb := Climb{
+	climb := models.Climb{
 		SessionID: payload.SessionID,
 		RouteID:   payload.RouteID,
 		Attempts:  payload.Attempts,
