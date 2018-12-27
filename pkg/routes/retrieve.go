@@ -21,7 +21,8 @@ func (h *handler) retrieve(c echo.Context) error {
 	route := Route{ID: rid}
 	err = h.app.DB.Model(&route).
 		WherePK().
-		Where("user_id = ?", claims.ID).
+		Where("route.user_id = ?", claims.ID).
+		Relation("Location").
 		Select()
 	if err != nil {
 		return errors.DatabaseError("route", err.Error())

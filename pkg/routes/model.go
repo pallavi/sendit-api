@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/go-pg/pg/orm"
+	"github.com/pallavi/sendit-api/pkg/locations"
 	validator "gopkg.in/go-playground/validator.v9"
 )
 
@@ -18,16 +19,17 @@ const (
 type Route struct {
 	tableName struct{} `sql:"routes"`
 
-	ID           int       `sql:"id,pk" json:"id"`
-	UserID       int       `sql:"user_id,notnull" json:"user"`
-	LocationID   int       `sql:"location_id" json:"location"`
-	Name         string    `sql:"name,notnull" json:"name"`
-	Type         string    `sql:"type,notnull" json:"type"`
-	Grade        string    `sql:"grade,notnull" json:"grade"`
-	Tags         []string  `sql:"tags,array" json:"tags"`
-	Deleted      bool      `sql:"deleted" json:"deleted,omitempty"`
-	DateCreated  time.Time `sql:"date_created,notnull" json:"date_created"`
-	DateModified time.Time `sql:"date_modified,notnull" json:"date_modified"`
+	ID           int                `sql:"id,pk" json:"id"`
+	UserID       int                `sql:"user_id,notnull" json:"user"`
+	LocationID   int                `sql:"location_id" json:"-"`
+	Location     locations.Location `json:"location"`
+	Name         string             `sql:"name,notnull" json:"name"`
+	Type         string             `sql:"type,notnull" json:"type"`
+	Grade        string             `sql:"grade,notnull" json:"grade"`
+	Tags         []string           `sql:"tags,array" json:"tags"`
+	Deleted      bool               `sql:"deleted" json:"deleted,omitempty"`
+	DateCreated  time.Time          `sql:"date_created,notnull" json:"date_created"`
+	DateModified time.Time          `sql:"date_modified,notnull" json:"date_modified"`
 }
 
 // ValidateGrade does cross-field validation of grade and type

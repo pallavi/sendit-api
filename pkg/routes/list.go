@@ -28,8 +28,9 @@ func (h *handler) list(c echo.Context) error {
 	}
 	routes := []Route{}
 	query := h.app.DB.Model(&routes).
-		Where("user_id = ?", claims.ID).
-		Where("deleted = false")
+		Where("route.user_id = ?", claims.ID).
+		Where("route.deleted = false").
+		Relation("Location")
 	if params.LocationID != 0 {
 		query = query.Where("location_id = ?", params.LocationID)
 	}
