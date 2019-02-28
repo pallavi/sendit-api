@@ -1,7 +1,6 @@
 package database
 
 import (
-	"fmt"
 	"log"
 	"time"
 
@@ -11,13 +10,11 @@ import (
 
 // New initializes a new database struct
 func New(cfg *config.Config) *pg.DB {
-	addr := fmt.Sprintf("%s:%d", cfg.DatabaseHost, cfg.DatabasePort)
-	db := pg.Connect(&pg.Options{
-		Addr:     addr,
-		User:     cfg.DatabaseUser,
-		Password: cfg.DatabasePassword,
-		Database: cfg.DatabaseName,
-	})
+	pgOptions, err := pg.ParseURL(cfg.DatabaseURL)
+	if err != nil {
+		log.Fatal(err)
+	}
+	db := pg.Connect(pgOptions)
 
 	if cfg.DatabaseDebug {
 		db.OnQueryProcessed(func(event *pg.QueryProcessedEvent) {
@@ -30,7 +27,7 @@ func New(cfg *config.Config) *pg.DB {
 		})
 	}
 
-	_, err := db.Exec("SELECT 1")
+	_, err = db.Exec("SELECT 1")
 	if err != nil {
 		log.Fatal(err)
 	}

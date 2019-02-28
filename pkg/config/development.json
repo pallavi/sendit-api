@@ -1,9 +1,6 @@
 {
     "database_debug": true,
-    "database_host": "localhost",
-    "database_name": "send_it",
-    "database_port": 5432,
-    "database_user": "send_it_admin",
+    "database_url": "postgres://send_it_admin@localhost:5432/send_it?sslmode=disable",
     "host": "localhost",
     "jwt_secret": "secret",
     "port": 3001

@@ -10,16 +10,12 @@ import (
 
 // Config contains environment specific configuration values.
 type Config struct {
-	DatabaseDebug    bool   `json:"database_debug"`
-	DatabaseHost     string `json:"database_host"`
-	DatabaseName     string `json:"database_name"`
-	DatabasePassword string `json:"database_password"`
-	DatabasePort     int    `json:"database_port"`
-	DatabaseUser     string `json:"database_user"`
-	Environment      string
-	Host             string `json:"host"`
-	JWTSecret        string `json:"jwt_secret"`
-	Port             int    `json:"port"`
+	DatabaseDebug bool   `json:"database_debug"`
+	DatabaseURL   string `json:"database_url"`
+	Environment   string
+	Host          string `json:"host"`
+	JWTSecret     string `json:"jwt_secret"`
+	Port          int    `json:"port"`
 }
 
 // LoadConfig returns a Config based on the "ENV" environment variable
@@ -33,6 +29,11 @@ func LoadConfig() *Config {
 		cfg.Environment = "staging"
 	default:
 		cfg.Environment = "development"
+	}
+
+	if cfg.Environment != "development" {
+		cfg.DatabaseURL = os.Getenv("DATABASE_URL")
+		cfg.JWTSecret = os.Getenv("JWT_SECRET")
 	}
 
 	file, err := os.Open(fmt.Sprintf("pkg/config/%s.json", cfg.Environment))

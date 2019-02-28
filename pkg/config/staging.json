@@ -1,4 +1,5 @@
 {
-    "database_name": "send_it",
-    "database_user": "send_it_admin"
+    "database_debug": false,
+    "host": "https://sendit-staging.herokuapp.com/",
+    "port": 7443
 }
