@@ -1,1 +1,2 @@
-web: gin --build ./cmd/serve --immediate run
+release: make db-migrate
+web: go run ./cmd/serve

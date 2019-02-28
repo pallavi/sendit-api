@@ -1,5 +1,4 @@
 {
     "database_debug": false,
-    "host": "https://sendit-staging.herokuapp.com/",
-    "port": 7443
+    "host": "https://sendit-staging.herokuapp.com/"
 }

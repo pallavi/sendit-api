@@ -2,8 +2,8 @@ GOTOOLS := \
 	github.com/alecthomas/gometalinter \
 	github.com/golang/dep/cmd/dep
 
-DATABASE_NAME := $(shell cat pkg/config/development.json | jq '.["database_name"]')
-DATABASE_USER := $(shell cat pkg/config/development.json | jq '.["database_user"]') 
+DATABASE_NAME := send_it
+DATABASE_USER := send_it_admin
 
 .PHONY: tools
 tools: ## First-time installation of development tools

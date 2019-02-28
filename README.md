@@ -6,7 +6,6 @@ building this to learn go
 you will need to install
 - Go
 - PostgreSQL
-- jq
 
 ## first time setup
 the first time you check out this project, install gometalinter and set up the database.

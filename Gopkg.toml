@@ -24,6 +24,12 @@
 #   go-tests = true
 #   unused-packages = true
 
+# https://devcenter.heroku.com/articles/go-apps-with-dep#build-configuration
+[metadata.heroku]
+  root-package = "github.com/pallavi/sendit-api"
+  go-version = "1.11.2"
+  ensure = true
+  install = ["./..."]
 
 [[constraint]]
   name = "github.com/labstack/echo"
