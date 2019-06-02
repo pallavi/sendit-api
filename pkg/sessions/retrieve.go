@@ -22,7 +22,8 @@ func (h *handler) retrieve(c echo.Context) error {
 	session := models.Session{ID: sid}
 	err = h.app.DB.Model(&session).
 		WherePK().
-		Where("user_id = ?", claims.ID).
+		Where("session.user_id = ?", claims.ID).
+		Relation("Location").
 		Select()
 	if err != nil {
 		return errors.DatabaseError("session", err.Error())

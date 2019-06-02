@@ -48,5 +48,12 @@ func (h *handler) create(c echo.Context) error {
 	if err != nil {
 		return errors.DatabaseError("session", err.Error())
 	}
+	err = h.app.DB.Model(&session).
+		WherePK().
+		Relation("Location").
+		Select()
+	if err != nil {
+		return errors.DatabaseError("session", err.Error())
+	}
 	return c.JSON(http.StatusOK, session)
 }

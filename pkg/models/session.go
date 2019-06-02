@@ -12,7 +12,8 @@ type Session struct {
 
 	ID           int        `sql:"id,pk" json:"id"`
 	UserID       int        `sql:"user_id,notnull" json:"user"`
-	LocationID   int        `sql:"location_id,notnull" json:"location"`
+	LocationID   int        `sql:"location_id,notnull" json:"-"`
+	Location     Location   `json:"location"`
 	StartTime    time.Time  `sql:"start_time,notnull" json:"start_time"`
 	EndTime      *time.Time `sql:"end_time" json:"end_time"`
 	Deleted      bool       `sql:"deleted" json:"deleted,omitempty"`

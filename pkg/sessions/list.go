@@ -25,8 +25,9 @@ func (h *handler) list(c echo.Context) error {
 	}
 	sessions := []models.Session{}
 	query := h.app.DB.Model(&sessions).
-		Where("user_id = ?", claims.ID).
-		Where("deleted = false")
+		Where("session.user_id = ?", claims.ID).
+		Where("session.deleted = false").
+		Relation("Location")
 	if params.LocationID != 0 {
 		query = query.Where("location_id = ?", params.LocationID)
 	}
